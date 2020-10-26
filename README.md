@@ -1,6 +1,11 @@
-requires Apache Maven
-https://maven.apache.org/download.cgi
+### Requirements
 
-extract `postgres.zip` to main directory
+- [Apache Maven](https://maven.apache.org/download.cgi)
 
-run `mvn install -DskipTests`
+### Instructions
+
+- extract `postgres.zip` to main directory
+
+- run `mvn install -DskipTests`
+
+- run `docker-compose up`
