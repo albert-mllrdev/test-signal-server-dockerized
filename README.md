@@ -14,6 +14,4 @@
 
 - Place the generated `certificate` and `private key` on the `config.yml` under `unidentifiedDelivery`
 
-- run `cd ..`
-
 - run `docker-compose up`
