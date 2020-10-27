@@ -4,8 +4,6 @@
 
 ### Instructions
 
-- extract `postgres.zip` to main directory
-
 - run `cd Signal-Server`
 
 - run `mvn install -DskipTests`

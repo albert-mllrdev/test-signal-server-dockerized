@@ -13,7 +13,10 @@ services:
     ports:
       - '5431:5432'
     volumes:
+      - ./postgres/accounts_db.sql:/docker-entrypoint-initdb.d/init.sql
       - './postgres/accounts_db:/var/lib/postgresql/data'
+    networks:
+      - default
 
   postgresql_message_db:
     image: 'postgres:11'
@@ -27,7 +30,10 @@ services:
     ports:
       - '5432:5432'
     volumes:
+      - ./postgres/message_db.sql:/docker-entrypoint-initdb.d/init.sql
       - './postgres/message_db:/var/lib/postgresql/data'
+    networks:
+      - default
       
   postgresql_abuse_db:
     image: 'postgres:11'
@@ -41,7 +47,10 @@ services:
     ports:
       - '5433:5432'
     volumes:
+      - ./postgres/abuse_db.sql:/docker-entrypoint-initdb.d/init.sql
       - './postgres/abuse_db:/var/lib/postgresql/data'
+    networks:
+      - default
 
   redis:
     image: 'redis:5'
