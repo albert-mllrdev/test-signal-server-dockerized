@@ -37,8 +37,11 @@ pushScheduler: # redis server for push scheduler
   replicaUrls:
     - redis://redis:6379/1 # change to your redis server
 
-
-
+unidentifiedDelivery:
+  certificate: # Generated certificate
+  privateKey: # Change this to you generated private key
+  expiresDays: 365
+  
 
 
 twilio:
@@ -163,11 +166,6 @@ apn:
   pushKey: "-----BEGIN RSA PRIVATE KEY-----\r\nMIIEpQIBAAKCAQEAyKPvBg+nIW8QhQyO20yuok8UB5w/xYlybxGAWzt3skFfP12Z\r\nuulWzvkWwOFAKwNm43VuSmZEkO4UmCXKJkApnJqapq143Gi9Cn3lop0s+Jm18aFy\r\nvSbKFEozn8u8lxxgy2Uhxlb5+YDtRVPVj19yLu2GDE9YcJzIJmSLs5+SvQIssb0M\r\n0pSJRLJ6aKkw1M/tXl7T1wCEj0E/PozPCaGaIU6zg7lFI9q0j1outpDAT7F+B+J3\r\nEoyOegxvxNJb1Fe3dDxIlJ6MRsM8nJhiVYKWar/xOqdXlDU+1LZeJLboqhL/H7d/\r\nm6ycfhaJDIuwCo8S75WEtfC0xuiW0DHJlx7HZQIDAQABAoIBAFNo+1xMs5FNp9N4\r\nBgebGFp3f38ucMCBRGZyIydKUJd1X9Bq7BbtHF6M5O2odtGq52IWFpStcUHDCCK8\r\nSw6dy+7DwxkZss4GaNhswENbDjAHTsE1+goyjv3iXxXGUA+OB5tm3qSi0ebstzcE\r\nBBtHdaOWsQx7C+w88WQslntFEm6qNSqeM1s5eQ20wSnlAA43Pm+NdVNM+JYX4iqt\r\n/MFdaPINE5XAXyBRAYir0l1dkofeGsb4rCuZmXSmjRRcC9vdhzmjrDUxLspOI7du\r\nUT7vYy3/hWFdng5oHu7JoDVrxF8/5e11j04jTq8SiHYfxUdR/Pmzt4/Nnu8SVjDJ\r\nesZJhwECgYEA7ElQyw2fzF3CQ2x526SBvLfFSxuX8zDkPjFtsrpZf78MHz9AR3ak\r\nlgEjR9aOfeWC1nRRZ6kGG8AgbpIZEN5KoCwZM98D6oub0VIg8iuR1UeArjebI8QV\r\nq2q5BeR3v2nmHsDXeG57D7O7DRko1tazp+d3/19hmMBOa4os19SsEaUCgYEA2WFH\r\nPtVwRtsQNcuKBCKHGzEVDG6Gm86kye2AdfJB7USr0fvD3HRah/chGi+foz+CDwwA\r\nzuBcgL45rSZZCTA9AFzihVpAFJ+a3GDgT/hSjJmMX3vHmySaZABmKNsiXRlPW+Fr\r\n7jkXwk7JH6emgcBH9d+Gyyp6ybVZvv/tNrFCcsECgYEA1DhtNlLASZ+UUVZmhF3W\r\noJc1vmXELgqllS5z5mj05YXD73Sx2P24iXnwJB+Sz4SJ5O+IBeCLufTvrB/QH5Rn\r\n1kCFSk9thwVpJ7HqIVf8nWChNNiAoLkG9XTfRWmUG/mTU9/EJ0ijgtDcmcEVKxCf\r\nP5jn8BfM4pMmW/Q4nolHGnkCgYEAnnLT1a8KSft/k1arYVwxktZx+z/NCmDTqQRf\r\nMJnHCEWX4FVdbKG7I4Q1Mrsn53xxNrqPFDxh8M23iMh8+b+Zl1wdGQqxztaPsLdE\r\nicX9ldKOiULWOfWyO9Y2oO0p3SaHu/dSDrC66r02yMYRDl6zlTq7K/fozIJNynUN\r\n2WHXh4ECgYEAneclaDj/KMtedyaJcblyEjtpzW3V/Gotws2cAaHqVaWDJHRrp0bl\r\nZNg8Jjf/NoixxENZ5bdduAR3JEjTwScRpOluO45Huq2gIMS7jsBKoDAvF94DNUI5\r\nNDtK8x/8+SOdk5HAGNHDoMqVbgZ2NpeOIGxzoZUCCK4f1j1CZbeEIio=\r\n-----END RSA PRIVATE KEY-----"
   bundleId: com.notused
   sandbox: true
-
-unidentifiedDelivery:
-  certificate: CiYI0gkSIQ000009AiF8PZMW0KzbjzRI8CviWkqU6CbkizpnlXRMqQVxJAhPaH0KYrIHUkCfoOmiysxpdbP0TnQWcPzzo3iXmN59fzESoalF/jmAJkULQWt3Pxv6Jz0c8O4qZ5KO77XPPcCA== # Your generated certificate
-  privateKey: eI1uxnJlJ+n000009ybVniZnqOjZ/GuhRgw7/I8v4g0zHM= # Change this to you generated private key
-  expiresDays: 365
 
 voiceVerification: # voice otp verification, afaik it use vox service
   url: https://server.chatapp.net
