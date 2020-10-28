@@ -1,1 +1,3 @@
-postgres
+postgres/abuse_db/pgdata
+postgres/accounts_db/pgdata
+postgres/message_db/pgdata
