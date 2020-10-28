@@ -1,54 +1,19 @@
 version: '3.3'
 services:
 
-  postgresql_accounts_db:
+  signal-database:
     image: 'postgres:11'
-    container_name: db_accounts
+    container_name: signal-database
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: accounts_db
-      PGDATA: /var/lib/postgresql/data/pgdata
-    ports:
-      - '5431:5432'
-    volumes:
-      - ./postgres/accounts_db.sql:/docker-entrypoint-initdb.d/init.sql
-      - './postgres/accounts_db:/var/lib/postgresql/data'
-    networks:
-      - default
-
-  postgresql_message_db:
-    image: 'postgres:11'
-    container_name: db_message
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: message_db
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - '5432:5432'
     volumes:
-      - ./postgres/message_db.sql:/docker-entrypoint-initdb.d/init.sql
-      - './postgres/message_db:/var/lib/postgresql/data'
-    networks:
-      - default
-      
-  postgresql_abuse_db:
-    image: 'postgres:11'
-    container_name: db_abuse
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: abuse_db
-      PGDATA: /var/lib/postgresql/data/pgdata
-    ports:
-      - '5433:5432'
-    volumes:
-      - ./postgres/abuse_db.sql:/docker-entrypoint-initdb.d/init.sql
-      - './postgres/abuse_db:/var/lib/postgresql/data'
+      - './signal-database/scripts/:/docker-entrypoint-initdb.d/'
+      - './signal-database:/var/lib/postgresql/data'
     networks:
       - default
 
@@ -93,9 +58,7 @@ services:
     networks:
       - default
     depends_on:
-      - postgresql_accounts_db
-      - postgresql_message_db
-      - postgresql_abuse_db
+      - signal-database
       - turn-server
       - redis
 
@@ -110,16 +73,14 @@ services:
 #     environment:
 #       - 'REDIS_HOSTS=main:redis_main:6379, replica:redis_replication:6380'
 
-  # adminer:
-  #   container_name: adminer
-  #   image:  adminer:latest
-  #   ports:  
-  #     - 8000:8080
-  #   links: 
-  #     - postgresql_accounts_db
-  #     - postgresql_message_db
-  #     - postgresql_abuse_db
-  #   environment: 
-  #     ADMINER_DESIGN: nette
-  #   networks:
-  #     - default
+  adminer:
+    container_name: adminer
+    image:  adminer:latest
+    ports:  
+      - 8000:8080
+    links: 
+      - signal-database
+    environment: 
+      ADMINER_DESIGN: nette
+    networks:
+      - default

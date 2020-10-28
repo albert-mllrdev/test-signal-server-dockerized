@@ -2,19 +2,19 @@ accountsDatabase: # database for account
   driverClass: org.postgresql.Driver
   user:        postgres
   password:    postgres
-  url:         jdbc:postgresql://postgresql_accounts_db/accounts_db
+  url:         jdbc:postgresql://signal-database/accounts_db
 
 messageStore: # database for message
   driverClass: org.postgresql.Driver
   user:        postgres
   password:    postgres
-  url:         jdbc:postgresql://postgresql_message_db/message_db
+  url:         jdbc:postgresql://signal-database/message_db
 
 abuseDatabase: # database for abuse
   driverClass: org.postgresql.Driver
   user:        postgres
   password:    postgres
-  url:         jdbc:postgresql://postgresql_abuse_db/abuse_db
+  url:         jdbc:postgresql://signal-database/abuse_db
 
 messageCache: # redis server for message store cache
   redis:
