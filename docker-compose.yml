@@ -63,9 +63,25 @@ services:
     networks:
       - default
 
+  turn-server:
+    build:
+      context: ./turn-server
+      dockerfile: Dockerfile
+    container_name: turn-server
+    restart: always
+    ports:
+      - '3478:3478/udp'
+      - '3478:3478/tcp'
+      - '5349:5349/udp'
+      - '5349:5349/tcp'
+    volumes:
+      - ./config/turnserver.conf:/etc/coturn/turnserver.conf
+    networks:
+      - default
+
   signal-server:
     build:
-      context: ./Signal-Server
+      context: ./signal-server
       dockerfile: Dockerfile
     container_name: signal-server
     restart: always
@@ -80,6 +96,7 @@ services:
       - postgresql_accounts_db
       - postgresql_message_db
       - postgresql_abuse_db
+      - turn-server
       - redis
 
 #   redis_commander:

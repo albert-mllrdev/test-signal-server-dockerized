@@ -4,7 +4,7 @@
 
 ### Instructions
 
-- run `cd Signal-Server`
+- run `cd signal-server`
 
 - run `mvn install -DskipTests`
 

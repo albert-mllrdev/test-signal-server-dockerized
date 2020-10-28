@@ -7,4 +7,4 @@ WORKDIR /usr/src/signal-server
 EXPOSE 8080
 EXPOSE 8081
 
-CMD ["java", "-jar", "TextSecureServer-3.21.jar", "server", "/config/config.yml"]
+CMD ["java", "-jar", "TextSecureServer-3.21.jar", "server", "/config/signal.yml"]
