@@ -1,3 +1,22 @@
+server:
+  applicationConnectors:
+    - type: https
+      port: 8080
+      keyStorePath: ./ssl/example.keystore
+      keyStorePassword: example
+      validateCerts: false
+  adminConnectors:
+    - type: https
+      port: 8081
+      keyStorePath: ./ssl/example.keystore
+      keyStorePassword: example
+      validateCerts: false
+  
+unidentifiedDelivery:
+  certificate: CiYI0gkSIQUVI1QWNk3S2l88YRFRMvJxrc2037O+j5r7kOLr/EC5ZRJAkQU6NTPfl0vN8uArV5qywAYLzJGVa5X3bvGP8GFTzTEU8MMq4I6kJC1RTjjgjMlkTvpe+1qKgoNg0XNYY/oSjQ== # Your generated certificate
+  privateKey: WG8mpwTAOF1qrBXeR+5XEzC5nUh625WIsofy3KlwHkE= # Change this to you generated private key
+  expiresDays: 365
+
 accountsDatabase: # database for account
   driverClass: org.postgresql.Driver
   user:        postgres
@@ -64,9 +83,9 @@ push:
 
 directory:
   redis: # Redis server configuration for directory cluster
-    url: redis://redis:6379/directory
+    url: redis://redis:6379/0
     replicaUrls:
-      -  redis://redis:6379/directoryReplica
+      -  redis://redis:6379/1
   client: # Configuration for interfacing with Contact Discovery Service cluster
     userAuthenticationTokenSharedSecret: 123456 # Generate it with `head -c 16 /dev/urandom | hexdump -ve '1/1 "%.2x"'`
     userAuthenticationTokenUserIdSecret: 123456 # Generate it with `head -c 16 /dev/urandom | hexdump -ve '1/1 "%.2x"'`
@@ -210,21 +229,8 @@ apn:
     
   bundleId: com.albert.testapp
   sandbox: true
-  
-unidentifiedDelivery:
-  certificate: CiYI0gkSIQUVI1QWNk3S2l88YRFRMvJxrc2037O+j5r7kOLr/EC5ZRJAkQU6NTPfl0vN8uArV5qywAYLzJGVa5X3bvGP8GFTzTEU8MMq4I6kJC1RTjjgjMlkTvpe+1qKgoNg0XNYY/oSjQ== # Your generated certificate
-  privateKey: WG8mpwTAOF1qrBXeR+5XEzC5nUh625WIsofy3KlwHkE= # Change this to you generated private key
-  expiresDays: 365
 
 voiceVerification: # voice otp verification, afaik it use vox service
   url: https://server.chatapp.net
   locales:
     - en
-
-server:
-  applicationConnectors:
-    - type: http
-      port: 8080
-  adminConnectors:
-    - type: http
-      port: 8081
