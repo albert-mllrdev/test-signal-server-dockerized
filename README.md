@@ -19,6 +19,7 @@
 - Place the generated `certificate` and `private key` under `unidentifiedDelivery` on `./config/signal.yml`
 
 #### Create SSL certificates
+##### Located under `./signal-server/ssl`
 
 #### Create private key for root CA certificate
 `openssl genrsa -out rootCA.key 4096`
