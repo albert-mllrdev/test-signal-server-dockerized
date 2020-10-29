@@ -6,9 +6,7 @@
 
 ### Compile the server code
 
-- run `cd signal-server`
-
-- run `mvn install -DskipTests`
+- run `mvn -f signal-server/pom.xml install -DskipTests`
 
 ### Update configuration
 
