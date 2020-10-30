@@ -1,6 +1,7 @@
 ## Requirements
 
 - [Apache Maven](https://maven.apache.org/download.cgi)
+- OpenSSL
 
 ## Instructions
 
@@ -33,9 +34,9 @@
 #### Create Certificate Signing Request
 `openssl req -new -key whisper.key -out whisper.csr -subj "/C=PH/CN=localhost"`
 
-#### Edit IP Address in 'ssl-extensions-x509.cnf' to local machine IP Address
-
 #### Sign the certificate with the root CA
+##### Edit IP Address in 'ssl-extensions-x509.cnf' to local machine IP Address
+
 `openssl x509 -req -extfile ssl-extensions-x509.cnf -in whisper.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -days 365 -out whisper.crt -extensions v3_ca`
 
 #### Export to host key and certificate to PKCS12 format which is recognized by Java keytool
