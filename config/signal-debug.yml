@@ -2,13 +2,13 @@ server:
   applicationConnectors:
     - type: https
       port: 8080
-      keyStorePath: ./ssl/example.keystore
+      keyStorePath: ./signal-server/ssl/example.keystore
       keyStorePassword: example
       validateCerts: false
   adminConnectors:
     - type: https
       port: 8081
-      keyStorePath: ./ssl/example.keystore
+      keyStorePath: ./signal-server/ssl/example.keystore
       keyStorePassword: example
       validateCerts: false
   
@@ -21,40 +21,40 @@ accountsDatabase: # database for account
   driverClass: org.postgresql.Driver
   user:        postgres
   password:    postgres
-  url:         jdbc:postgresql://signal-database/accounts_db
+  url:         jdbc:postgresql://localhost:5432/accounts_db
 
 messageStore: # database for message
   driverClass: org.postgresql.Driver
   user:        postgres
   password:    postgres
-  url:         jdbc:postgresql://signal-database/message_db
+  url:         jdbc:postgresql://localhost:5432/message_db
 
 abuseDatabase: # database for abuse
   driverClass: org.postgresql.Driver
   user:        postgres
   password:    postgres
-  url:         jdbc:postgresql://signal-database/abuse_db
+  url:         jdbc:postgresql://localhost:5432/abuse_db
 
 messageCache: # redis server for message store cache
   redis:
-    url: redis://redis:6379/0 # change to your redis server
+    url: redis://localhost:6379/0 # change to your redis server
     replicaUrls:
-      -  redis://redis:6379/1 # change to your redis server
+      -  redis://localhost:6379/1 # change to your redis server
 
 cache: # redis server for cache cluster
-  url: redis://redis:6379/0 # change to your redis server
+  url: redis://localhost:6379/0 # change to your redis server
   replicaUrls:
-    -  redis://redis:6379/1 # change to your redis server
+    -  redis://localhost:6379/1 # change to your redis server
 
 pubsub: # redis server for pubsub cache
-  url: redis://redis:6379/0 # change to your redis server
+  url: redis://localhost:6379/0 # change to your redis server
   replicaUrls:
-    -  redis://redis:6379/1 # change to your redis server   
+    -  redis://localhost:6379/1 # change to your redis server   
 
 pushScheduler: # redis server for push scheduler
-  url: redis://redis:6379/0 # change to your redis server
+  url: redis://localhost:6379/0 # change to your redis server
   replicaUrls:
-    - redis://redis:6379/1 # change to your redis server
+    - redis://localhost:6379/1 # change to your redis server
 
 turn: # Coturn server configuration
   secret: secret # You will need the same config with the secret in turnserver.conf
@@ -63,6 +63,7 @@ turn: # Coturn server configuration
     - stun:turn-server:5349 # If you change the port in turnserver.conf, change this too
     - turn:turn-server:5349?transport=udp # If you change the port in turnserver.conf, change this too
     - turn:turn-server:3478?transport=udp # If you change the port in turnserver.conf, change this too
+
     
 twilio:
   accountId: ACba72df169faf676eb94b6e7ae9f127ef
@@ -82,53 +83,49 @@ push:
 
 directory:
   redis: # Redis server configuration for directory cluster
-    url: redis://redis:6379/0
+    url: redis://localhost:6379/0
     replicaUrls:
-      -  redis://redis:6379/1
+      -  redis://localhost:6379/1
   client: # Configuration for interfacing with Contact Discovery Service cluster
     userAuthenticationTokenSharedSecret: 123456 # Generate it with `head -c 16 /dev/urandom | hexdump -ve '1/1 "%.2x"'`
     userAuthenticationTokenUserIdSecret: 123456 # Generate it with `head -c 16 /dev/urandom | hexdump -ve '1/1 "%.2x"'`
   sqs:
-    accessKey:   AKIAQ565H442DES00000 # Change this to your AWS IAM Access Key
+    accessKey:     AKIAQ565H442DES00000 # Change this to your AWS IAM Access Key
     accessSecret: YmpZCxz2lzgemvmLTa2uC38IG2ADBFztm5l00000 # Change this to your AWS IAM Secret
-    queueUrl: https://sqs.us-west-2.amazonaws.com/824755116394/MyQueue.fifo # Change this to your AWS SQS (FIFO) URL
+    queueUrl:     https://sqs.us-west-2.amazonaws.com/824755116394/MyQueue.fifo # Change this to your AWS SQS (FIFO) URL
   server: # You can change the certificate with your own certificate
-    replicationUrl: http://127.0.0.1:9090 # CDS replication endpoint base url
+    replicationUrl: https://localhost:8080 # CDS replication endpoint base url
     replicationPassword: mypassword # CDS replication endpoint password
     replicationCaCertificate: |
       -----BEGIN CERTIFICATE-----
-      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
+      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
+      MVf8xjrHnOr4k7NyShQOnrhCqSxwBik=
       -----END CERTIFICATE-----
 
 awsAttachments: # aws s3 configuration

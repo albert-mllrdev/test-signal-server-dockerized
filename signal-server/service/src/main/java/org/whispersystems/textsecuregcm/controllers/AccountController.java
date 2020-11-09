@@ -165,7 +165,7 @@ public class AccountController {
     StoredVerificationCode storedVerificationCode = new StoredVerificationCode(null,
                                                                                System.currentTimeMillis(),
                                                                                pushChallenge);
-
+   
     pendingAccounts.store(number, storedVerificationCode);
 
     if ("fcm".equals(pushType)) {
@@ -194,6 +194,10 @@ public class AccountController {
     if (!Util.isValidNumber(number)) {
       logger.info("Invalid number: " + number);
       throw new WebApplicationException(Response.status(400).build());
+    }
+
+    if (forwardedFor == null){
+      forwardedFor = "127.0.0.1";
     }
 
     String requester = Arrays.stream(forwardedFor.split(","))
